@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height: 100vh;
+            width: 100%;
+            background: rgb(189, 189, 202);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .field{
+        display: flex;
+        height: 220px;
+        flex-direction: column;
+        background: rgb(189, 189, 202);
+            border-radius: 4px;
+            box-shadow: 5px 5px 3px rgb(97, 95, 95),
+             -5px -5px 4px rgb(216, 213, 213);
+        padding: 10px;
+        text-align: center;
+        color: white;
+        border-radius: 7px;
+        transition: 0.25s linear;
+        overflow: hidden;
+        transition: 0.5s linear;
+
+        }
+        .title{
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+        .input{
+            height: 40px;
+            font-size: 15px;
+            border: none;
+            margin-bottom: 15px;
+            background: rgb(189, 189, 202);
+            border-radius: 4px;
+            box-shadow: inset 5px 5px 3px rgb(97, 95, 95),
+            inset -5px -5px 4px rgb(216, 213, 213);
+            padding: 8px;
+        }
+          .input:focus{
+              outline: none;
+          }
+        .btn{
+            height: 35px;
+            background: rgb(189, 189, 202);
+            border-radius: 4px;
+            box-shadow: 2px 2px 3px rgb(97, 95, 95),
+             -2px -2px 3px rgb(216, 213, 213);
+            border: 0;
+            border-radius: 5px;
+            color: white;
+            font-size: 20px;
+            transition: 0.15s linear;
+            margin-top: 15px;
+        }
+        .btn:hover{
+            box-shadow: 5px 5px 3px rgb(97, 95, 95),
+                        -5px -5px 4px rgb(216, 213, 213);
+        }
+        .qrcode{
+            height: 180px;
+            width: 180px;
+            
+        }
+        .imgbox{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+        .msg{
+            display: none;
+            position: relative;
+            top: 100px;
+            font-size: 25px;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="field" id="field">
+        <div class="title">Create Your QR Code</div>
+        <input class="input" id="input" placeholder="Drop Your Content Here">
+        <div class="msg" id="msg">Please Wait...</div>
+           <div class="imgbox">
+            <img src="" class="qr" id="qr">
+        </div>
+        
+        <button onclick="generate()" class="btn">Generate</button>
+        <button onclick="createNew()" class="btn">Create New</button>
+    </div>
+    <script>
+        let text = document.getElementById("input");
+        let img = document.getElementById("qr");
+        let field = document.getElementById("field");
+        let msg = document.getElementById("msg");
+
+        function generate(){
+            if(text.value==""){
+             alert("Please Add Content");
+            }else{
+            img.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + text.value;
+            img.classList.add("qrcode");
+            field.style.height="400px";
+            msg.style.display="block";
+            }
+        }
+        function createNew(){
+            window.location.reload();
+        }
+    </script>
+</body>
+</html>
